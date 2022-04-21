@@ -1,0 +1,23 @@
+{
+  "name": "paoo-lista-exercicios",
+  "version": "1.0.0",
+  "description": "Lista de exercicio de javascriot primeiro bimestre PAOO",
+  "main": "calculadoraFunction.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luanLTS/paoo-lista-exercicios-js.git"
+  },
+  "author": "Luan Teixeira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luanLTS/paoo-lista-exercicios-js/issues"
+  },
+  "homepage": "https://github.com/luanLTS/paoo-lista-exercicios-js#readme",
+  "dependencies": {
+    "prompt-sync": "^4.2.0",
+    "prompts": "^2.4.2"
+  }
+}
