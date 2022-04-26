@@ -5,15 +5,15 @@ const axios = require("axios");
 const { APPID, LANGUAGE, UNITS, PROTOCOL, BASE_URL } = process.env;
 let url = `${PROTOCOL}://${BASE_URL}?lang=${LANGUAGE}&units=${UNITS}&appid=${APPID}`;
 
-const getWather = async (url, lat, lon) => {
-  try {
-    const { data } = await axios.get(`${url}&lat=${lat}&lon=${lon}`);
-    console.log(`Temperatura = ${Math.round(data.main.temp)}°C`);
-  } catch (e) {
-    console.log("Erro ao buscar a temperatura atual, tente novamente.");
-    console.log(e);
-  }
-};
+// const getWather = async (url, lat, lon) => {
+//   try {
+//     const { data } = await axios.get(`${url}&lat=${lat}&lon=${lon}`);
+//     console.log(`Temperatura = ${Math.round(data.main.temp)}°C`);
+//   } catch (e) {
+//     console.log("Erro ao buscar a temperatura atual, tente novamente.");
+//     console.log(e);
+//   }
+// };
 
 const currentWeather = () => {
   let questions = [
@@ -43,7 +43,8 @@ const currentWeather = () => {
       (async () => {
         const { lat, lon } = await prompts(questions);
         // chamada da requisicao aqui
-        await getWather(url, lat, lon);
+        let { data } = await axios.get(`${url}&lat=${lat}&lon=${lon}`);
+        console.log(`Temperatura = ${Math.round(data.main.temp)}°C`);
         currentWeather();
       })();
     }

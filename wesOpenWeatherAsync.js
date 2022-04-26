@@ -7,7 +7,7 @@ let lat;
 let lon;
 let url = `${PROTOCOL}://${BASE_URL}?lang=${LANGUAGE}&units=${UNITS}&appid=${APPID}`;
 
-function getTempLatLon() {
+async function getTempLatLon() {
   console.log(`\nMenu:
     1 - para latitude e longitude
 
@@ -18,21 +18,21 @@ function getTempLatLon() {
     case 1:
       lat = prompt("Digite a latitude: ");
       lon = prompt("Digite a longitude: ");
-      request = `${url}&lat=${lat}&lon=${lon}`;
-      axios
-        .get(request)
-        .then((res) => {
-          return res.data;
-        })
-        .then((res) => {
-          console.log(`
-                    A temperatura atual de ${res.name} - ${res.sys.country} é: ${res.main.temp}ºC`);
-          getTempLatLon();
-        })
-        .catch(() => {
-          console.log("Localização não encontrada!");
-          getTempLatLon();
-        });
+
+      try {
+        request = `${url}&lat=${lat}&lon=${lon}`;
+        res = await axios.get(request);
+        console.log(res);
+        const { name } = res.data;
+        const { country } = res.data.sys;
+        const { temp } = res.data.main;
+        console.log(`
+            A temperatura atual de ${name} - ${country} é: ${temp}ºC`);
+        getTempLatLon();
+      } catch (e) {
+        console.log(e);
+        console.log("Erro!");
+      }
       break;
     case 2:
       console.log("Saindo do programa...");
