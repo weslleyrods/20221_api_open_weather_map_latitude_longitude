@@ -10,23 +10,28 @@ let url = `${PROTOCOL}://${BASE_URL}?lang=${LANGUAGE}&units=${UNITS}&appid=${APP
 async function getTempLatLon() {
   console.log(`\nMenu:
     1 - para latitude e longitude
+
     2 - Sair
     `);
-
   op = parseInt(prompt());
   switch (op) {
     case 1:
       lat = prompt("Digite a latitude: ");
       lon = prompt("Digite a longitude: ");
-      request = `${url}&lat=${lat}&lon=${lon}`;
+
       try {
-        let pegarInfo = await axios.get(request);
-        console.log("A cidade " + pegarInfo.data.name);
-        console.log("esta com a temperatura " + pegarInfo.data.main.temp);
+        request = `${url}&lat=${lat}&lon=${lon}`;
+        res = await axios.get(request);
+        console.log(res);
+        const { name } = res.data;
+        const { country } = res.data.sys;
+        const { temp } = res.data.main;
+        console.log(`
+            A temperatura atual de ${name} - ${country} é: ${temp}ºC`);
         getTempLatLon();
       } catch (e) {
-        console.log("localização não encontrada");
-        getTempLatLon();
+        console.log(e);
+        console.log("Erro!");
       }
       break;
     case 2:
