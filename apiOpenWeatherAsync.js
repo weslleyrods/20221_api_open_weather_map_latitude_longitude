@@ -10,7 +10,6 @@ let url = `${PROTOCOL}://${BASE_URL}?lang=${LANGUAGE}&units=${UNITS}&appid=${APP
 async function getTempLatLon() {
   console.log(`\nMenu:
     1 - para latitude e longitude
-
     2 - Sair
     `);
   op = parseInt(prompt());
